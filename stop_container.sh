@@ -3,18 +3,21 @@
 
 # Stop the running container (if any)
 #sudo su - root
-#docker stop $(ps -a -q)
-#docker rm $(ps -a -q)
+#sudo docker stop $(ps -a -q)
+#sudo docker rm $(ps -a -q)
 --------
+#!/bin/bash
 set -e
 
-# Stop and remove running containers (if any)
-CONTAINERS=$(docker ps -q)
+# Stop and remove Docker containers (if any)
+CONTAINERS=$(sudo docker ps -a -q)
 
 if [ -n "$CONTAINERS" ]; then
     echo "Stopping containers: $CONTAINERS"
-    docker stop $CONTAINERS
-    docker rm $CONTAINERS
+    sudo docker stop $CONTAINERS
+    echo "Removing containers: $CONTAINERS"
+    sudo docker rm $CONTAINERS
 else
     echo "No running containers to stop or remove."
 fi
+
